@@ -15,7 +15,7 @@ class APIBundle(Bundle):
         app.api_set.append(self)
 
     def browse_api(self):
-        for name, view in self.endpoints.items():
+        for name, view in list(self.endpoints.items()):
             for url in view._urls:
                 u = url[0]
                 methods = url[1].get('methods', ['GET'])
@@ -36,10 +36,10 @@ class MethodCaller(object):
         return 'http://%s/%s' % (host, self.method['url'].format(**kwargs))
 
     def __call__(self, **kwargs):
-        import urllib2
+        import urllib.request, urllib.error, urllib.parse
         url = self.gen_url(**kwargs)
-        opener = urllib2.build_opener(urllib2.HTTPHandler)
-        request = urllib2.Request(url)
+        opener = urllib.request.build_opener(urllib.request.HTTPHandler)
+        request = urllib.request.Request(url)
         data = opener.open(request)
         return data.read()
 

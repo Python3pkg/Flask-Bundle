@@ -25,7 +25,7 @@ Room('room', '/room').push_bundle(app)
 apis = list(api.dump_api(app))
 api_generated = api.generate_api(apis, '127.0.0.1:5000')
 for m in apis:
-    print m
+    print(m)
 
-print api_generated.room.get.__dict__
+print(api_generated.room.get.__dict__)
 #print 'API call result:', api_generated.room.get(id=1)

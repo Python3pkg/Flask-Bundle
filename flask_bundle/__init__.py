@@ -47,7 +47,7 @@ class Bundle(routing.Submount):
         app.url_map.add(self)
         if self.leaf:
             app.url_map.add(self.leaf)
-        for endpoint, view in self.endpoints.iteritems():
+        for endpoint, view in self.endpoints.items():
             app.endpoint(endpoint)(self.wrapper(view))
 
     def wrapper(self, view):
